@@ -129,3 +129,7 @@ footer {
 footer p {
   font-family: "Merriweather", serif;
 }
+h2 {
+  text-align: center;
+  padding-bottom: 40px;
+}
