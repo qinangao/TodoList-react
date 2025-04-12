@@ -1,14 +1,21 @@
-const list = [
-  { id: 1, task: "Learn React", checked: false },
-  { id: 2, task: "Learn JS", checked: false },
-  { id: 3, task: "Cooking", checked: true },
-];
+import { useState } from "react";
+
+// const list = [
+//   { id: 1, description: "Learn React", checked: false },
+//   { id: 2, description: "Learn JS", checked: false },
+//   { id: 3, description: "Cooking", checked: true },
+// ];
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  function handleAddTask(task) {
+    setTasks((tasks) => [...tasks, task]);
+  }
   return (
     <div className="app">
       <Title />
-      <Form />
-      <List />
+      <Form onAddTask={handleAddTask} />
+      <List tasks={tasks} />
     </div>
   );
 }
@@ -24,22 +31,38 @@ function Title() {
     </div>
   );
 }
-function Form() {
+
+function Form({ onAddTask }) {
+  const [description, setDescription] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const newTask = { description, checked: false, id: Date.now() };
+    console.log(newTask);
+
+    setDescription("");
+    onAddTask(newTask);
+  }
   return (
     <div>
-      <form>
-        <input className="task--input" type="text" />
+      <form onSubmit={handleSubmit}>
+        <input
+          className="task--input"
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
         <button className="btn-add">Add</button>
       </form>
     </div>
   );
 }
-function List() {
+function List({ tasks }) {
   return (
     <div>
       <ul>
-        {list.map((task) => (
-          <Item task={task} />
+        {tasks.map((task) => (
+          <Item task={task} key={task.id} />
         ))}
       </ul>
     </div>
@@ -50,7 +73,7 @@ function Item({ task }) {
   return (
     <li>
       <input type="checkbox" />
-      <span>{task.task}</span>
+      <span className={task.checked ? "checked" : ""}>{task.description}</span>
       <button className="btn--delete">Delete</button>
     </li>
   );
