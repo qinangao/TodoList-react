@@ -11,11 +11,27 @@ function App() {
   function handleAddTask(task) {
     setTasks((tasks) => [...tasks, task]);
   }
+
+  function handleDeleteTask(id) {
+    setTasks((tasks) => tasks.filter((task) => task.id !== id));
+  }
+
+  function handleCheckTask(id) {
+    setTasks((tasks) =>
+      tasks.map((task) =>
+        task.id === id ? { ...task, checked: !task.checked } : task
+      )
+    );
+  }
   return (
     <div className="app">
       <Title />
       <Form onAddTask={handleAddTask} />
-      <List tasks={tasks} />
+      <List
+        tasks={tasks}
+        onDeleteTask={handleDeleteTask}
+        onCheckTask={handleCheckTask}
+      />
     </div>
   );
 }
@@ -27,7 +43,7 @@ function Title() {
         <img src="/todo.png" alt="logo" />
         <h1>Todo List</h1>
       </div>
-      <p>Better plan, better life!</p>
+      <p>Little tasks, big wins!🐻☕📋</p>
     </div>
   );
 }
@@ -37,8 +53,15 @@ function Form({ onAddTask }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(description.length);
+    if (!description) return;
+    if (description.length > 25) {
+      alert("Input exceeds limit. Try again.");
+      setDescription("");
+      return;
+    }
+
     const newTask = { description, checked: false, id: Date.now() };
-    console.log(newTask);
 
     setDescription("");
     onAddTask(newTask);
@@ -57,24 +80,35 @@ function Form({ onAddTask }) {
     </div>
   );
 }
-function List({ tasks }) {
+function List({ tasks, onDeleteTask, onCheckTask }) {
   return (
     <div>
       <ul>
         {tasks.map((task) => (
-          <Item task={task} key={task.id} />
+          <Item
+            task={task}
+            key={task.id}
+            onDeleteTask={onDeleteTask}
+            onCheckTask={onCheckTask}
+          />
         ))}
       </ul>
     </div>
   );
 }
 
-function Item({ task }) {
+function Item({ task, onDeleteTask, onCheckTask }) {
   return (
     <li>
-      <input type="checkbox" />
-      <span className={task.checked ? "checked" : ""}>{task.description}</span>
-      <button className="btn--delete">Delete</button>
+      <div className="content">
+        <input type="checkbox" onClick={() => onCheckTask(task.id)} />
+        <span className={task.checked ? "checked" : ""}>
+          {task.description}
+        </span>
+      </div>
+      <button className="btn--delete" onClick={() => onDeleteTask(task.id)}>
+        <img src="/delete.svg" alt="" />
+      </button>
     </li>
   );
 }
