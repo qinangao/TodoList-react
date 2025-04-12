@@ -16,6 +16,7 @@ export default function Form({ onAddTask }) {
     const newTask = { description, checked: false, id: Date.now() };
 
     setDescription("");
+    console.log(onAddTask);
     onAddTask(newTask);
   }
   return (

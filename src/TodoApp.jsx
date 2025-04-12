@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Title from "./Title";
 import Form from "./Form";
 import List from "./List";
@@ -8,32 +7,32 @@ import List from "./List";
 //   { id: 2, description: "Learn JS", checked: false },
 //   { id: 3, description: "Cooking", checked: true },
 // ];
-function TodoApp() {
-  const [tasks, setTasks] = useState([]);
+function TodoApp({ tasks, onAddTask, onCheckTask, onDeleteTask }) {
+  // const [tasks, setTasks] = useState([]);
 
-  function handleAddTask(task) {
-    setTasks((tasks) => [...tasks, task]);
-  }
+  // function handleAddTask(task) {
+  //   setTasks((tasks) => [...tasks, task]);
+  // }
 
-  function handleDeleteTask(id) {
-    setTasks((tasks) => tasks.filter((task) => task.id !== id));
-  }
+  // function handleDeleteTask(id) {
+  //   setTasks((tasks) => tasks.filter((task) => task.id !== id));
+  // }
 
-  function handleCheckTask(id) {
-    setTasks((tasks) =>
-      tasks.map((task) =>
-        task.id === id ? { ...task, checked: !task.checked } : task
-      )
-    );
-  }
+  // function handleCheckTask(id) {
+  //   setTasks((tasks) =>
+  //     tasks.map((task) =>
+  //       task.id === id ? { ...task, checked: !task.checked } : task
+  //     )
+  //   );
+  // }
   return (
     <div className="app">
       <Title />
-      <Form onAddTask={handleAddTask} />
+      <Form onAddTask={onAddTask} />
       <List
         tasks={tasks}
-        onDeleteTask={handleDeleteTask}
-        onCheckTask={handleCheckTask}
+        onDeleteTask={onDeleteTask}
+        onCheckTask={onCheckTask}
       />
     </div>
   );
