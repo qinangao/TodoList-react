@@ -60,3 +60,8 @@ li {
   justify-content: space-between;
   gap: 30px;
 }
+
+.checked {
+  text-decoration: line-through;
+  text-decoration-color: #a22821;
+}
