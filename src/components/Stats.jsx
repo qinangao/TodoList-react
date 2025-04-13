@@ -13,7 +13,7 @@ export default function Stats({ tasks }) {
           : `You are ${Math.round(
               (numChecked / numTasks) * 100
             )}% through your ${numTasks} ${
-              numUnchecked === 1 ? "task" : "tasks"
+              numTasks === 1 ? "task" : "tasks"
             }! Onward, productivity hero! 🦸‍♂️✨`}
       </h2>
     </div>
