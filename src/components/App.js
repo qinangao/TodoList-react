@@ -29,7 +29,7 @@ function App() {
         onDeleteTask={handleDeleteTask}
         onCheckTask={handleCheckTask}
       />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
