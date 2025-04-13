@@ -1,5 +1,5 @@
 import TodoApp from "./TodoApp";
-import Footer from "./Footer";
+
 import Stats from "./Stats";
 import { useState } from "react";
 
@@ -29,7 +29,6 @@ function App() {
         onDeleteTask={handleDeleteTask}
         onCheckTask={handleCheckTask}
       />
-      {/* <Footer /> */}
     </div>
   );
 }
