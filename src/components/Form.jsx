@@ -5,9 +5,9 @@ export default function Form({ onAddTask }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(description.length);
+    // console.log(description.length);
     if (!description) return;
-    if (description.length > 25) {
+    if (description.length > 20) {
       alert("Input exceeds limit. Try again.");
       setDescription("");
       return;
@@ -16,7 +16,6 @@ export default function Form({ onAddTask }) {
     const newTask = { description, checked: false, id: Date.now() };
 
     setDescription("");
-    console.log(onAddTask);
     onAddTask(newTask);
   }
   return (
