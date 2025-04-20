@@ -1,10 +1,14 @@
 import TodoApp from "./TodoApp";
 
 import Stats from "./Stats";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(function () {
+    const storeValue = localStorage.getItem("tasks");
+    return JSON.parse(storeValue);
+  });
+
   function handleAddTask(task) {
     setTasks((tasks) => [...tasks, task]);
   }
@@ -20,6 +24,11 @@ function App() {
       )
     );
   }
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
   return (
     <div className="wrapper">
       <Stats tasks={tasks} />
