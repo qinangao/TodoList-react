@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [tasks, setTasks] = useState(function () {
     const storeValue = localStorage.getItem("tasks");
-    return JSON.parse(storeValue);
+    return storeValue ? JSON.parse(storeValue) : [];
   });
 
   function handleAddTask(task) {
