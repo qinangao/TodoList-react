@@ -2,15 +2,21 @@ import Title from "./Title";
 import Form from "./Form";
 import List from "./List";
 
-function TodoApp({ tasks, onAddTask, onCheckTask, onDeleteTask }) {
+function TodoApp({
+  onAddTask,
+  onCheckTask,
+  onDeleteTask,
+  filteredTasks,
+  inputRef,
+}) {
   return (
     <div className="app">
       <Title />
-      <Form onAddTask={onAddTask} />
+      <Form onAddTask={onAddTask} inputRef={inputRef} />
       <List
-        tasks={tasks}
         onDeleteTask={onDeleteTask}
         onCheckTask={onCheckTask}
+        filteredTasks={filteredTasks}
       />
     </div>
   );

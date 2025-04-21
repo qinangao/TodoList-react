@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Form({ onAddTask }) {
+export default function Form({ onAddTask, inputRef }) {
   const [description, setDescription] = useState("");
 
   function handleSubmit(e) {
@@ -26,6 +26,7 @@ export default function Form({ onAddTask }) {
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          ref={inputRef}
         />
         <button className="btn-add">Add</button>
       </form>
