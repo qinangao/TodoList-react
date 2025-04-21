@@ -1,9 +1,9 @@
 import Item from "./Item";
-export default function List({ tasks, onDeleteTask, onCheckTask }) {
+export default function List({ onDeleteTask, onCheckTask, filteredTasks }) {
   return (
     <div className="list--container">
       <ul>
-        {tasks.map((task) => (
+        {filteredTasks.map((task) => (
           <Item
             task={task}
             key={task.id}
