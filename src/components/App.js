@@ -13,6 +13,7 @@ function App() {
 
   useEffect(() => {
     focusInput();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleAddTask(task) {
